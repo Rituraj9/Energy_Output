@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+    <title>Predict Wind Energy</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body >
+
+  <div class="topnav" id="myTopnav">
+    <a href="https://github.com/Rituraj9/IBM-Energy_Output"><i class="fa fa-info-circle"></i> About</a>
+  </div>
+  <div class="login">
+  <h1>Predict Wind Energy</h1>
+  <form class="text-center" style="border-style: solid; color: #757575; margin-bottom:10px" method="POST" action="/predict">
+    <table width="100%">
+      <tbody>
+          <tr>
+            <td>
+              <div class="form-field">{{ form.Wind_Speed.label }} {{ form.Wind_Speed }}</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="form-field ">{{ form.Theoretical_Power_Curve.label }} {{ form.Theoretical_Power_Curve }}</div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="form-field ">{{ form.Wind_Direction.label }} {{ form.Wind_Direction }}</div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    <input id="submit" style="margin-bottom: 10px;" name="submit" type="submit" onclick="startSpinner()" value="Predict">
+    
+    <br>
+  </form>
+
+  <div class="d-flex justify-content-center">
+    <div id="loader" style="color:black; display: none;" class="spinner-border"></div>
+  </div>
+  <div class="output-container">
+    <center>
+      <div id="output">
+        <h2 id="a">Energy Output of Wind Turbine(in KW) is: </h2>
+        <h2 id="b">{{ form.abc }}</h2>
+      </div>
+    </center>
+  </div>
+</div>
+  <script>
+
+window.onload = function exampleFunction() { 
+  
+  // var output = document.getElementById("output");
+  // output.style.display = "none"
+} 
+
+    function startSpinner() {
+      var x = document.getElementById("loader");
+      x.style.display = "block";
+      var output = document.getElementById("output");
+      output.style.display = "none"
+      setTimeout(function () {
+        var y = document.getElementById("output");
+        var x = document.getElementById("loader");
+        var a = document.getElementById("a");
+        var b = document.getElementById("b");
+        x.style.display = "none";
+        y.style.display = "block"
+        a.style.display = "block"
+        b.style.display = "block"
+      }, 3000);
+
+    }
+  </script>
+
+</body>
+
+</html>
